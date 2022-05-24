@@ -49,6 +49,8 @@ gem 'sassc-rails', '>= 2.1.0'
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'jquery-rails'
+gem 'httparty'
+gem 'dotenv-rails'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
