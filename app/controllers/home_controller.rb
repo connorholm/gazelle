@@ -6,7 +6,8 @@ class HomeController < ApplicationController
   def index
     puts "Params: #{params}"
     if !(params[:city] == nil or params[:city] == "")
-      @data = search_weather(params[:city])
+      response = search_weather(params[:city])
+      @data = response
     end
     # key = ENV["OPEN_WEATHER_API_KEY"]
     
@@ -22,8 +23,6 @@ class HomeController < ApplicationController
   def search_weather(city)
     api = WeatherApi.new()
     url = api.unique_url(city)
-    @data = url
-    
     url
   end
 end

@@ -23,6 +23,7 @@ class WeatherApi
             :query => query_city,
         )
         json = JSON.parse(response.body)
+        puts json
         json
     end
 end

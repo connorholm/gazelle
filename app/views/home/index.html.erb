@@ -23,12 +23,16 @@
     <br/>
     <div class="container d-flex justify-content-center">
         <% if @data != nil %>
-            <div class="card" style="width: 18rem;">
-                <%= image_tag "http://openweathermap.org/img/w/#{@data["weather"][0]["icon"]}.png", class:"card-img-top" %>
-            <div class="card-body">
-                <h5 class="card-title"><%= @data["name"] %>: <%= @data["main"]['temp'] %>° Fahrenheit</h5>
-                <p class="card-text"><%= @data["weather"][0]["description"] %></p>
-            </div>
+            <% if @data["cod"] == 200 %>
+                <div class="card" style="width: 18rem;">
+                    <%= image_tag "http://openweathermap.org/img/wn/#{@data["weather"][0]["icon"]}@2x.png", class:"card-img-top" %>
+                <div class="card-body">
+                    <h5 class="card-title"><%= @data["name"] %>: <%= @data["main"]['temp'] %>° Fahrenheit</h5>
+                    <p class="card-text"><%= @data["weather"][0]["description"] %></p>
+                </div>
+            <% else %>
+                <%= @data["message"] %>
+            <% end %>
         <% end %>
 </div>
     </div>
