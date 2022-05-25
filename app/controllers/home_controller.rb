@@ -2,7 +2,7 @@ require 'net/http'
 require 'api/weather_api'
 class HomeController < ApplicationController
   helper_method :search_weather
-  
+
   def index
     puts "Params: #{params}"
     if !(params[:city] == nil or params[:city] == "")
@@ -23,6 +23,7 @@ class HomeController < ApplicationController
     api = WeatherApi.new()
     url = api.unique_url(city)
     @data = url
+    
     url
   end
 end

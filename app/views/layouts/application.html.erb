@@ -13,16 +13,17 @@
 
   <body>
     <%= render "shared/header" %>
-    <br/>
     <div class="container">
       <% if alert %>
+        <br/>
         <%= render "shared/alerts" %>
       <% end %>
       <% if notice %>
+        <br/>
         <%= render "shared/notice" %>
       <% end %>
-      <%= yield %>
     </div>
+    <%= yield %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
