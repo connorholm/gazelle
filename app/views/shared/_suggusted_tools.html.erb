@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag "tools_page.css" %>
+<div class="container">
+    <h5 class="display-5">Gazelle's Other Tools</h5>
+    <div class="row">
+        <% if current_page != "tagging" %>
+            <div class="col-sm-4">
+                <div class="card mb-3 border-0 lift lift-lg shadow-light-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Topic Tagging</h5>
+                    <p class="card-text">Automatically generate topics and keywords for articles and blogs.</p>
+                    <%= link_to "Try", tools_tagging_path, class:"btn btn-primary stretched-link" %>
+                </div>
+                </div>
+            </div>
+        <% end %>
+        <% if current_page != "keywords" %>
+            <div class="col-sm-4">
+                <div class="card mb-3 border-0 lift lift-lg shadow-light-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Keywords</h5>
+                    <p class="card-text">Find top keywords surrounding a given subject or topic.</p>
+                    <%= link_to "Try", tools_keywords_path, class:"btn btn-primary stretched-link" %>
+                </div>
+                </div>
+            </div>
+        <% end %>
+        <% if current_page != "page_inspect" %>
+            <div class="col-sm-4">
+                <div class="card mb-3 border-0 lift lift-lg shadow-light-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Page Inspect</h5>
+                    <p class="card-text">Inspect a website's keywords and SEO tactics. Useful for finding a way to outrank competitors.</p>
+                    <%= link_to "Try", tools_page_inspect_path, class:"btn btn-primary stretched-link" %>
+                </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    
+</div>

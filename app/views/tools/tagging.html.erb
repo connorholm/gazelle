@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "tools_page.css" %>
 <%= stylesheet_link_tag "searchbox.css" %>
 <%= stylesheet_link_tag "tools_background" %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -22,9 +23,8 @@
             </div>
         </div>
     </div>
-
-<% if @tagging_response != nil %>
 <div class="blue-gradient-bg pt-4">
+<% if @tagging_response != nil %>
 <div class="container">
     <% if @tagging_response["result_code"] == "200" %>
         <div class="card mb-4">
@@ -77,12 +77,13 @@
                 </table>
             </div>
         </div>
-        </div>
     <% else %>
         <h1> An Error Ocurred</h1>
         <p>Issue with the server or request</p>
     <% end %>
 <% end %>
+<%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
+</div>
 </div>
 </div>
 
