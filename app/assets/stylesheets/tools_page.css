@@ -21,3 +21,17 @@ img {
     max-width: 100%;
     height: auto;
   }
+
+.spacer {
+    aspect-ratio: 960/100;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.layer1 {
+    background-image: url('assets/svg/blue-wave.svg');
+}
+.blue-background {
+    background-image: linear-gradient(#25deff, white);
+}
