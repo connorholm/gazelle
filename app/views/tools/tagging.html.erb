@@ -1,2 +1,39 @@
-<h1>Tools#tagging</h1>
-<p>Find me in app/views/tools/tagging.html.erb</p>
+<%= stylesheet_link_tag "searchbox.css" %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <div class="text-bg-secondary">
+        <div class="py-6 row justify-content-center search-box-image">
+            <div class="col-12 col-md-10 col-lg-8">
+                <h2 class="display-4">Topic Tagging</h2>
+                <p class="">Paste a chunk of text to be analysed for keywords and topics</p>
+                <%= form_tag(tools_tagging_path, method: "get", class:"card card-sm") do %>
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <%= text_field_tag(:text, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Text")  %>                            
+                        </div>
+                        <div class="col-auto">
+                            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<%= @tagging_response %>
+<% if @data != nil %>
+    <% if @data["result_code"] == 200 %>
+        <div class="card" style="width: 18rem;">
+            <%= image_tag "http://openweathermap.org/img/wn/#{@data["weather"][0]["icon"]}@2x.png", class:"card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title"><%= @data["name"] %>: <%= @data["main"]['temp'] %>° Fahrenheit</h5>
+                <p class="card-text"><%= @data["weather"][0]["description"] %></p>
+            </div>
+        </div>
+    <% else %>
+        <h1> An Error Ocurred</h1>
+        <p>Issue with the server or request</p>
+    <% end %>
+<% end %>
+
