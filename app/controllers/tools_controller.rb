@@ -5,10 +5,10 @@ class ToolsController < ApplicationController
   end
 
   def tagging
-    puts "Params: #{params}"
     if !(params[:text] == nil or params[:text] == "")
       response = get_tags(params[:text])
       @tagging_response = response
+      @tagging_search = params[:text]
     end
   end
 

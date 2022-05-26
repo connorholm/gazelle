@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "searchbox.css" %>
+<%= stylesheet_link_tag "tools_background" %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <div class="text-bg-secondary">
         <div class="py-6 row justify-content-center search-box-image">
@@ -11,7 +12,7 @@
                             <i class="fas fa-search h4 text-body"></i>
                         </div>
                         <div class="col">
-                            <%= text_field_tag(:text, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Text")  %>                            
+                            <%= text_area_tag(:text, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Paste in Some Text")  %>                            
                         </div>
                         <div class="col-auto">
                             <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
@@ -21,19 +22,67 @@
             </div>
         </div>
     </div>
-<%= @tagging_response %>
-<% if @data != nil %>
-    <% if @data["result_code"] == 200 %>
-        <div class="card" style="width: 18rem;">
-            <%= image_tag "http://openweathermap.org/img/wn/#{@data["weather"][0]["icon"]}@2x.png", class:"card-img-top" %>
-            <div class="card-body">
-                <h5 class="card-title"><%= @data["name"] %>: <%= @data["main"]['temp'] %>° Fahrenheit</h5>
-                <p class="card-text"><%= @data["weather"][0]["description"] %></p>
+
+<% if @tagging_response != nil %>
+<div class="blue-gradient-bg pt-4">
+<div class="container">
+    <% if @tagging_response["result_code"] == "200" %>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="display-5">Search: </h3>
             </div>
+            <div class="card-body">
+                <p class="card-text"><%= @tagging_search %></p>
+            </div>
+        </div>
+        <h3 class="display-5">Result</h3>
+        <div class="row">
+        <div class="col-6">
+            <div class="table-responsive">
+                <table class="table table-hover table-stripe table-bordered table-light">
+                    <thead class="bg-light">
+                        <tr>
+                        <th scope="col col-1">#</th>
+                        <th scope="col">Keyword</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @tagging_response["keyword"].each_with_index do |keyword, index| %>
+                        <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= keyword[0] %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="table-responsive">
+                <table class="table table-hover table-stripe table-bordered table-light">
+                    <thead class="bg-light">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Topics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @tagging_response["topic"].each_with_index do |topic, index| %>
+                        <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= topic[0] %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         </div>
     <% else %>
         <h1> An Error Ocurred</h1>
         <p>Issue with the server or request</p>
     <% end %>
 <% end %>
+</div>
+</div>
 
