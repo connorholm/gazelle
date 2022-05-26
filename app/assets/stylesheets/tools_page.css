@@ -32,6 +32,9 @@ img {
 .layer1 {
     background-image: url('assets/svg/blue-wave.svg');
 }
+.white-wave{
+    background-image: url('assets/svg/white-wave.svg');
+}
 .blue-background {
     background-image: linear-gradient(#25deff, white);
 }

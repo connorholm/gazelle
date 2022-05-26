@@ -77,12 +77,21 @@
                 </table>
             </div>
         </div>
+        </div>
+    </div>
     <% else %>
         <h1> An Error Ocurred</h1>
         <p>Issue with the server or request</p>
     <% end %>
 <% end %>
-<%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
+<% if @tagging_response != nil %>
+    </div>
+    <div class="spacer white-wave"></div>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
+<% else %>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
+    </div>
+<% end %>
 </div>
 </div>
 </div>

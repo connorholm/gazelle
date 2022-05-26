@@ -1,0 +1,72 @@
+<%= stylesheet_link_tag "tools_page.css" %>
+<%= stylesheet_link_tag "searchbox.css" %>
+<%= stylesheet_link_tag "tools_background" %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <div class="text-bg-secondary">
+        <div class="py-6 row justify-content-center search-box-image">
+            <div class="col-12 col-md-10 col-lg-8">
+                <h2 class="display-4">Keywords</h2>
+                <p class="">Find top keywords surrounding a given subject or topic.</p>
+                <%= form_tag(tools_keywords_path, method: "get", class:"card card-sm") do %>
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <%= text_field_tag(:search, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Subject")  %>                            
+                        </div>
+                        <div class="col-auto">
+                            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<div class="blue-gradient-bg pt-4">
+<% if @keywords_response != nil %>
+<div class="container">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="display-5">Search: </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><%= @keywords_search %></p>
+            </div>
+        </div>
+        <h3 class="display-5">Result</h3>
+        <div class="row">
+        <div class="col-6">
+            <div class="table-responsive">
+                <table class="table table-hover table-stripe table-bordered table-light">
+                    <thead class="bg-light">
+                        <tr>
+                        <th scope="col col-1">#</th>
+                        <th scope="col">Keyword</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @keywords_response["googleGuggestedKeywords"].each_with_index do |keyword, index| %>
+                        <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= keyword %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+</div>
+<% end %>
+<% if @keywords_response != nil %>
+    </div>
+    <div class="spacer white-wave"></div>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "keywords"} %>
+<% else %>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "keywords"} %>
+    </div>
+<% end %>
+
+</div>
+</div>
