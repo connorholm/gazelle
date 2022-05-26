@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'tools/tagging'
+  get 'tools/keywords'
+  get 'tools/page_inspect'
+  get 'tools/index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     passwords: 'users/passwords',
