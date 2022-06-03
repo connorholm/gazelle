@@ -1,5 +1,6 @@
 require 'api/topic_tagging_api'
 require 'api/keywords_api'
+require 'api/page_inspect_api'
 
 class ToolsController < ApplicationController
   def index
@@ -22,6 +23,11 @@ class ToolsController < ApplicationController
   end
 
   def page_inspect
+    if !(params[:url] == nil or params[:url] == "")
+      response = get_page_inspect(params[:url])
+      @page_inspect_response = response
+      @page_inspect_search = params[:url]
+    end
   end
 
   def get_tags(text)
@@ -34,5 +40,11 @@ class ToolsController < ApplicationController
     api = KeywordApi.new()
     url = api.keyword_request(search)
     url
+  end
+
+  def get_page_inspect(url)
+    api = PageInspectApi.new()
+    data = api.page_inspect_request(url)
+    data
   end
 end

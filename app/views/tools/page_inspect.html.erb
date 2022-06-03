@@ -1,0 +1,121 @@
+<%= stylesheet_link_tag "tools_page.css" %>
+<%= stylesheet_link_tag "searchbox.css" %>
+<%= stylesheet_link_tag "tools_background" %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <div class="text-bg-secondary">
+        <div class="py-6 row justify-content-center search-box-image">
+            <div class="col-12 col-md-10 col-lg-8">
+                <h2 class="display-4">Page Inspect</h2>
+                <p class="">Inspect a website's keywords and SEO tactics. Useful for finding a way to outrank competitors.</p>
+                <%= form_tag(tools_page_inspect_path, method: "get", class:"card card-sm") do %>
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <%= text_field_tag(:url, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Enter Website URL")  %>                            
+                        </div>
+                        <div class="col-auto">
+                            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<div class="blue-gradient-bg pt-4">
+<% if @page_inspect_response != nil %>
+<div class="container">
+    <% if @page_inspect_response != "Couldn't read url inputed" %>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="display-5">Search: </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><%= link_to @page_inspect_search, @page_inspect_search, :target => "_blank" %></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="display-5">Info</h3>
+            </div>
+            <div class="card-body">
+                <% if @page_inspect_response["title"] != nil %>
+                    <h5 class="card-title">Title: <%= @page_inspect_response["title"] %></h5>
+                <% end %>
+                <% if @page_inspect_response["lastUpdated"] != nil%>
+                    <p class="card-text">Last Updated: <%= DateTime.parse(@page_inspect_response["lastUpdated"]).strftime("%m-%d-%Y") %></p>
+                <% end %>
+                <% if @page_inspect_response["lang"] != nil %>
+                    <p class="card-text">Language: <%= @page_inspect_response["lang"] %></p>
+                <% end %>
+                <% if @page_inspect_response["metaDescription"] != nil %>
+                    <p class="card-text">Meta-Description: <%= @page_inspect_response["metaDescription"] %></p>
+                <% end %>
+                <% if @page_inspect_response["wordsInPage"] != nil %>
+                    <p class="card-text">Words: <%= @page_inspect_response["wordsInPage"] %></p>
+                <% end %>
+                <% if @page_inspect_response["charactersInPage"] != nil %>
+                    <p class="card-text">Characters: <%= @page_inspect_response["charactersInPage"] %></p>
+                <% end %>
+                <% if @page_inspect_response["keywords"] != nil %>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-stripe table-bordered table-light">
+                            <thead class="bg-light">
+                                <tr>
+                                <th scope="col col-1">#</th>
+                                <th scope="col">Keywords</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @page_inspect_response["keywords"].each_with_index do |keyword, index| %>
+                                    <tr>
+                                    <th scope="row"><%= index + 1 %></th>
+                                    <td><%= keyword %></td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div> 
+                <% end %>
+                <% if @page_inspect_response["mostWordTop20"] != nil %>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-stripe table-bordered table-light">
+                            <thead class="bg-light">
+                                <tr>
+                                <th scope="col col-1">#</th>
+                                <th scope="col">Most Common Words</th>
+                                <th scope="col">Occurrences</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @page_inspect_response["mostWordTop20"].each_with_index do |wordObject, index| %>
+                                    <tr>
+                                    <th scope="row"><%= index + 1 %></th>
+                                    <td><%= wordObject['word'] %></td>
+                                    <td><%= wordObject['count'] %></td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div> 
+                <% end %>
+            </div>
+        </div>
+    <% else %>
+        <h1> An Error Ocurred</h1>
+        <p>Issue with the server or request</p>
+    <% end %>
+</div>
+<% end %>
+<% if @page_inspect_response != nil %>
+    </div>
+    <div class="spacer white-wave"></div>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "page_inspect"} %>
+<% else %>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "page_inspect"} %>
+    </div>
+<% end %>
+</div>
+</div>
+</div>
