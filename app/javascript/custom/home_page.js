@@ -12,10 +12,9 @@
         var element = elements[i];
         var positionFromTop = elements[i].getBoundingClientRect().top;
   
-        if (positionFromTop - windowHeight <= 0) {
+        if (positionFromTop - (3* windowHeight/4) <= 0) {
           if (element.classList.contains('hidden-typer')) {
             element.classList.remove('hidden');
-            // wait 2 seconds before typing
             element.classList.add('typed-out')
           } else {
             element.classList.remove('hidden');
