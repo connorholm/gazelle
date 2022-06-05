@@ -1,0 +1,22 @@
+.text-muted {
+    color: #869ab8!important;
+  }
+  .spacer {
+    aspect-ratio: 960/100;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .blue-wave-bottom{
+    background-image: url('assets/svg/dark_blue_bottom.svg');
+  }
+  .blue-wave-top {
+    background-image: url('assets/svg/dark_blue_top.svg');
+  }
+  .fw-bold {
+    font-weight: 600!important;
+  }
+  .bg-dark {
+    background-color: #1b2a4e!important;
+  }
