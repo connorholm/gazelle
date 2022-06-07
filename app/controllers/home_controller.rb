@@ -17,6 +17,12 @@ class HomeController < ApplicationController
   def contact
   end
 
+  def privacy_policy
+  end
+
+  def terms_conditions
+  end
+
   def search_weather(city)
     api = WeatherApi.new()
     url = api.unique_url(city)
