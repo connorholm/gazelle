@@ -72,8 +72,47 @@
 <% if @keywords_response != nil %>
     </div>
     <div class="spacer white-wave"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <h1 class="display-4 mt-3">Using Keywords</h1>
+                <p class="text-muted">
+                Keyword research is an important part of SEO. If you are able to properly implement keywords into your website, the amount of natural traffic drive to the website will increase.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To generate related keywords, add a subject or topic to the search box. The result will be a list of the most relavent keywords that surround the subject or topic. Start to encorporate the keywords into your website content.
+                </p>
+                <p class="mt-4 text-muted"><strong>Adding Keywords to Your Page.</strong>
+                Once you have the keywords generate by Gazelle's tool, make sure to add them to your websites pages. Over time, Google's spiders will crawl the web and then increase your page's rank due to proper keywords.
+                </p>
+            </div>
+            <div class="col-12 col-lg-4">
+                <img src="/assets/keyword_image.png" height="450" class="mx-auto d-block mb-4" alt="keyword graphic image">
+            </div>
+        </div>
+    </div>
+    
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "keywords"} %>
 <% else %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <h1 class="display-4 mt-3">Using Keywords</h1>
+                <p class="text-muted">
+                Keyword research is an important part of SEO. If you are able to properly implement keywords into your website, the amount of natural traffic drive to the website will increase.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To generate related keywords, add a subject or topic to the search box. The result will be a list of the most relavent keywords that surround the subject or topic. Start to encorporate the keywords into your website content.
+                </p>
+                <p class="mt-4 text-muted"><strong>Adding Keywords to Your Page.</strong>
+                Once you have the keywords generate by Gazelle's tool, make sure to add them to your websites pages. Over time, Google's spiders will crawl the web and then increase your page's rank due to proper keywords.
+                </p>
+            </div>
+            <div class="col-12 col-lg-4">
+                <img src="/assets/keyword_image.png" height="450" class="mx-auto d-block mb-4" alt="keyword graphic image">
+            </div>
+        </div>
+    </div>
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "keywords"} %>
     </div>
 <% end %>

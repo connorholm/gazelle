@@ -114,8 +114,46 @@
 <% if @page_inspect_response != nil %>
     </div>
     <div class="spacer white-wave"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Page Inspect</h1>
+                <p class="text-muted">
+                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                </p>
+            </div>
+            <div class="col-6 col-md-4">
+                <img src="/assets/page_inspect.png" class="mx-auto d-block mt-5 mb-4" alt="keyword graphic image">
+            </div>
+        </div>
+    </div>
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "page_inspect"} %>
 <% else %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Page Inspect</h1>
+                <p class="text-muted">
+                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                </p>
+            </div>
+            <div class="col-6 col-md-4">
+                <img src="/assets/page_inspect.png" class="mx-auto d-block mt-5 mb-4" alt="keyword graphic image">
+            </div>
+        </div>
+    </div>
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "page_inspect"} %>
     </div>
 <% end %>

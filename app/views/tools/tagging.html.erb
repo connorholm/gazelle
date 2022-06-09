@@ -90,8 +90,46 @@
 <% if @tagging_response != nil %>
     </div>
     <div class="spacer white-wave"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Topic Tagging</h1>
+                <p class="text-muted">
+                Topic tagging will let you analyze a chunk of text to see the different keywords that are contained inside the text along with the different topics that the text is about. This will help you make sure your content is focus around correct topics.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To find topics and keywords, copy and paste a group of text into the input field that you would like analyzed. The result will be a list of topics and keywords. Keywords are words contained inside the text while topic is general ideas surrounding the text that doesn't necessarily need to be inside the text.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords and topics generated from the text, double check that they are the topics your are trying to target. If you are analyzing a competitors text, start to incorperate both the keywords and topics into your content. This will allow for the best search engine optimization.
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="/assets/topic_tagging.png" height="450" class="mx-auto d-block mt-4 mb-4" alt="topic tagging graphic image">
+            </div>
+        </div>
+    </div>
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
 <% else %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Topic Tagging</h1>
+                <p class="text-muted">
+                Topic tagging will let you analyze a chunk of text to see the different keywords that are contained inside the text along with the different topics that the text is about. This will help you make sure your content is focus around correct topics.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To find topics and keywords, copy and paste a group of text into the input field that you would like analyzed. The result will be a list of topics and keywords. Keywords are words contained inside the text while topic is general ideas surrounding the text that doesn't necessarily need to be inside the text.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords and topics generated from the text, double check that they are the topics your are trying to target. If you are analyzing a competitors text, start to incorperate both the keywords and topics into your content. This will allow for the best search engine optimization.
+                </p>
+            </div>
+            <div class="col-12 col-md-4">
+                <img src="/assets/topic_tagging.png" height="450" class="mx-auto d-block mt-4 mb-4" alt="topic tagging graphic image">
+            </div>
+        </div>
+    </div>
     <%= render partial: '/shared/suggusted_tools', locals: {current_page: "tagging"} %>
     </div>
 <% end %>
