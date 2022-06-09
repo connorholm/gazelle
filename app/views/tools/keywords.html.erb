@@ -1,13 +1,15 @@
 <%= stylesheet_link_tag "tools_page.css" %>
 <%= stylesheet_link_tag "searchbox.css" %>
 <%= stylesheet_link_tag "tools_background" %>
+<%= stylesheet_link_tag "keyword_page.css" %>
+<%= javascript_include_tag 'custom/keyword_page.js' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <div class="text-bg-secondary">
         <div class="py-6 row justify-content-center search-box-image">
             <div class="col-12 col-md-10 col-lg-8">
                 <h2 class="display-4">Keywords</h2>
                 <p class="">Find top keywords surrounding a given subject or topic.</p>
-                <%= form_tag(tools_keywords_path, method: "get", class:"card card-sm") do %>
+                <%= form_for(tools_keywords_path, method: "get", class:"card card-sm", id:"myform") do |f| %>
                     <div class="card-body row no-gutters align-items-center">
                         <div class="col-auto">
                             <i class="fas fa-search h4 text-body"></i>
@@ -16,7 +18,10 @@
                             <%= text_field_tag(:search, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Subject")  %>                            
                         </div>
                         <div class="col-auto">
-                            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+                            <%= f.button "Search", :name => nil, class: "btn btn-lg btn-primary" do %>
+                                <span class="show-when-enabled">Search</span>
+                                <span class="show-when-disabled"><i class='fa fa-spinner fa-spin'></i>  Loading</span>
+                            <% end %>
                         </div>
                     </div>
                 <% end %>
@@ -24,7 +29,7 @@
         </div>
     </div>
 <div class="blue-gradient-bg pt-4">
-<% if @keywords_response != nil %>
+<% if (@keywords_response != nil) && (@search_keywords == true) %>
 <div class="container">
         <div class="card mb-4">
             <div class="card-header">
@@ -59,6 +64,11 @@
         </div>
 </div>
 <% end %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<div id="pageloader">
+   <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+</div>
 <% if @keywords_response != nil %>
     </div>
     <div class="spacer white-wave"></div>

@@ -28,3 +28,13 @@ $spacers: (
 
 @import "bootstrap";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css");
+
+button {
+  .show-when-enabled { display: initial; }
+  .show-when-disabled { display: none; }
+
+  &[disabled] {
+    .show-when-enabled { display: none; }
+    .show-when-disabled { display: initial; }
+  }
+}

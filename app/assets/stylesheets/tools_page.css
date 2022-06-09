@@ -29,12 +29,44 @@ img {
     background-position: center;
     background-size: cover;
 }
+.text-muted {
+    color: #869ab8!important;
+}
 .layer1 {
-    background-image: url('assets/svg/blue-wave.svg');
+    background-image: url('assets/svg/tools_wave.svg');
 }
 .white-wave{
     background-image: url('assets/svg/white-wave.svg');
 }
 .blue-background {
-    background-image: linear-gradient(#25deff, white);
+    background-image: linear-gradient(#0066FF, white);
+}
+
+.type-block{
+    display: inline-block;
+  }
+  .typed-out{
+    overflow: hidden;
+    border-right: .15em solid rgb(0, 132, 255);
+    white-space: nowrap;
+    animation: 
+      typing 2s forwards;
+    font-size: 1.6rem;
+    width: 0;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes fade-in {
+    from {opacity: 0; transform: scale(.7,.7)}
+    to {opacity: 1;}
+}
+.fade-in-element {
+    animation: fade-in 1.4s;
+}
+
+.hidden {
+    opacity: 0;
 }

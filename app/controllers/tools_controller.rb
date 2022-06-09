@@ -16,9 +16,10 @@ class ToolsController < ApplicationController
 
   def keywords
     if !(params[:search] == nil or params[:search] == "")
-      response = get_keywords(params[:search])
-      @keywords_response = response
       @keywords_search = params[:search]
+      assign_search()
+      puts @search_keywords
+      get_keywords(params[:search])
     end 
   end
 
@@ -30,6 +31,10 @@ class ToolsController < ApplicationController
     end
   end
 
+  def assign_search()
+    @search_keywords = true
+  end
+
   def get_tags(text)
     api = TopicTaggingApi.new()
     url = api.tagging_request(text)
@@ -39,7 +44,7 @@ class ToolsController < ApplicationController
   def get_keywords(search)
     api = KeywordApi.new()
     url = api.keyword_request(search)
-    url
+    @keywords_response = url
   end
 
   def get_page_inspect(url)

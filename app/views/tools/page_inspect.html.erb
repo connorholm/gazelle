@@ -7,7 +7,7 @@
             <div class="col-12 col-md-10 col-lg-8">
                 <h2 class="display-4">Page Inspect</h2>
                 <p class="">Inspect a website's keywords and SEO tactics. Useful for finding a way to outrank competitors.</p>
-                <%= form_tag(tools_page_inspect_path, method: "get", class:"card card-sm") do %>
+                <%= form_for(tools_page_inspect_path, method: "get", class:"card card-sm") do |f| %>
                     <div class="card-body row no-gutters align-items-center">
                         <div class="col-auto">
                             <i class="fas fa-search h4 text-body"></i>
@@ -16,7 +16,10 @@
                             <%= text_field_tag(:url, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Enter Website URL")  %>                            
                         </div>
                         <div class="col-auto">
-                            <%= submit_tag "Search", :name => nil, class: "btn btn-lg btn-primary" %>
+                            <%= f.button "Search", :name => nil, class: "btn btn-lg btn-primary" do %>
+                                <span class="show-when-enabled">Search</span>
+                                <span class="show-when-disabled"><i class='fa fa-spinner fa-spin'></i>  Loading</span>
+                            <% end %>
                         </div>
                     </div>
                 <% end %>
