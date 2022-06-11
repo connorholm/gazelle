@@ -1,5 +1,5 @@
 require 'api/topic_tagging_api'
-require 'api/keywords_api'
+require 'api/keyword_api'
 require 'api/page_inspect_api'
 
 class ToolsController < ApplicationController
