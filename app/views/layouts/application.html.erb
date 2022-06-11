@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Seoapp</title>
+    <title>Gazelle</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,18 +9,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <%= favicon_link_tag asset_path('logo/white-logo.png') %>
   </head>
 
   <body>
     <%= render "shared/header" %>
     <div class="container">
       <% if alert %>
-        <br/>
         <%= render "shared/alerts" %>
       <% end %>
       <% if notice %>
-        <br/>
-        <%= render "shared/notice" %>
+         <%= render "shared/notice" %>
       <% end %>
     </div>
     <%= yield %>

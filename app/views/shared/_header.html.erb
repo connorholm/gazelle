@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "header.css" %>
 <nav class="navbar sticky-top navbar-dark navbar-expand-lg", style="background-color: #0d6efd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/home/index">
@@ -9,11 +10,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <%= link_to "Tools", tools_index_path, class:"nav-link" %>
+          <li class="nav-item dropdown">
+                <a class="nav-link" href="/tools/index" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Tools </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="/tools/keywords">Keywords</a></li>
+                    <li><a class="dropdown-item" href="/tools/tagging">Topic Tagging</a></li>
+                    <li><a class="dropdown-item" href="/tools/page_inspect">Page Inspect</a></li>
+                </ul>
           </li>
           <li class="nav-item">
             <%= link_to "About", home_about_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Contact", home_contact_path , class:"nav-link" %>
           </li>
       </ul>
       <div class="nav-item justify-content-end">

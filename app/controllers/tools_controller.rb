@@ -3,6 +3,7 @@ require 'api/keywords_api'
 require 'api/page_inspect_api'
 
 class ToolsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   def index
   end
 
