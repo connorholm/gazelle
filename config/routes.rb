@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     confirmations: 'users/confirmations',
   }
+  devise_scope :user do
+    # Redirests signing out users back to sign-in
+    get "users", to: "users/sessions#new"
+  end
   get 'home/index'
   get 'home/about'
   get 'home/contact'
