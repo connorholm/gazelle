@@ -64,11 +64,6 @@
         </div>
 </div>
 <% end %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-<div id="pageloader">
-   <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
-</div>
 <% if @keywords_response != nil %>
     </div>
     <div class="spacer white-wave"></div>
@@ -87,7 +82,7 @@
                 </p>
             </div>
             <div class="col-12 col-lg-4">
-                <img src="/assets/keyword_image.png" height="450" class="mx-auto d-block mb-4" alt="keyword graphic image">
+                <%= image_tag "keyword_image.png", height:"450", class:"mx-auto d-block mb-4", alt:"keyword graphic image" %>
             </div>
         </div>
     </div>
@@ -109,7 +104,7 @@
                 </p>
             </div>
             <div class="col-12 col-lg-4">
-                <img src="/assets/keyword_image.png" height="450" class="mx-auto d-block mb-4" alt="keyword graphic image">
+                <%= image_tag "keyword_image.png", height:"450", class:"mx-auto d-block mb-4", alt:"keyword graphic image" %>
             </div>
         </div>
     </div>

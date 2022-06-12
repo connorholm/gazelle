@@ -22,32 +22,23 @@
             <!-- Image -->
             <div class="row gx-4">
               <div class="col-4">
-                <%= image_tag "/about_page/table_planning.png", width:"400", class:"img-fluid rounded shadow-lg", alt:"table planning" %>
+                <%= image_tag asset_path("about_page/table_planning.png"), width:"400", class:"img-fluid rounded shadow-lg", alt:"table planning" %>
               </div>
               <div class="col-3">
-
-                <img class="img-fluid rounded shadow-lg mb-4" width="265" src="/assets/about_page/project_planning.png" alt="project planning">
-
-                <img class="img-fluid rounded shadow-lg" width="265" src="/assets/about_page/group_computer.png" alt="group computer">
-
+                <%= image_tag asset_path("about_page/project_planning.png"), width:"265", class:"img-fluid rounded shadow-lg mb-4", alt:"project planning" %>
+                <%= image_tag asset_path("about_page/group_computer.png"), width:"265", class:"img-fluid rounded shadow-lg", alt:"group computer" %>
               </div>
               <div class="col-5">
 
                 <div class="row gx-5 mb-4">
                   <div class="col-5">
-
-                    <img class="img-fluid rounded shadow-lg" src="/assets/about_page/group_explaining.png" alt="group explaining">
-
+                    <%= image_tag asset_path("about_page/group_explaining.png"), class:"img-fluid rounded shadow-lg", alt:"group explaining" %>
                   </div>
                   <div class="col-7">
-
-                    <img class="img-fluid rounded shadow-lg" src="/assets/about_page/computer_work.png" alt="computer work">
-
+                    <%= image_tag asset_path("about_page/computer_work.png"), class:"img-fluid rounded shadow-lg", alt:"computer work" %>
                   </div>
                 </div> <!-- / .row -->
-
-                <img class="img-fluid rounded shadow-lg" src="/assets/about_page/group_planning.png" alt="group planning">
-
+                <%= image_tag asset_path("about_page/group_planning.png"), class:"img-fluid rounded shadow-lg", alt:"group plannning" %>
               </div>
             </div>
 
