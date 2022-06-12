@@ -33,7 +33,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Update", class:"btn btn-secondary" %>
+    <%= f.button "Update", class: "btn btn-secondary" do %>
+      <span class="show-when-enabled">Update</span>
+      <span class="show-when-disabled"><i class='fa fa-spinner fa-spin'></i>  Loading</span>
+    <% end %>
   </div>
 <% end %>
   </div>
