@@ -82,7 +82,7 @@ Rails.application.configure do
     port:                 587,
     domain:               'localhost:3000',
     user_name:            'gazelletools@gmail.com',
-    password:             'mcqlwttvfptjazuq',
+    password:             ENV["GMAIL_PASS"],
     authentication:       'plain',
     enable_starttls_auto: true,
     open_timeout:         5,
