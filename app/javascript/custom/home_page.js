@@ -15,7 +15,7 @@
         if (positionFromTop - (3* windowHeight/4) <= 0) {
           if (element.classList.contains('hidden-typer')) {
             element.classList.remove('hidden');
-            element.classList.add('typed-out')
+            element.classList.add('typed-out');
           } else {
             element.classList.remove('hidden');
             element.classList.add('fade-in-element');
