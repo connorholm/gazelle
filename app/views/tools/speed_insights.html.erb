@@ -43,7 +43,34 @@
                 <h3 class="display-5">Info</h3>
             </div>
             <div class="card-body">
+                <h3>Chrome User Experience Report Results</h3>
+                <p class="card-text">First Contentful Paint: <%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                <p class="card-text">First Input Delay: <%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                <br/>
+                <h3>LightHouse Results</h3>
+                <% lighthouse_results = @speed_insights_response['lighthouseResult']['audits'] %>
+                <% if lighthouse_results['first-contentful-paint'] != nil %>
+                    <p class="card-text">First Contentful Paint: <%= lighthouse_results['first-contentful-paint']['displayValue'] %></p>
+                <% end %>
+                <% if lighthouse_results['interactive'] != nil %>
+                    <p class="card-text">Speed Index: <%= lighthouse_results['interactive']['displayValue'] %></p>
+                <% end %>
+                <% if lighthouse_results['interactive'] != nil%>
+                    <p class="card-text">Time To Interactive: <%= lighthouse_results['interactive']['displayValue'] %></p>
+                <% end %>
+                <% if lighthouse_results['first-meaningful-paint'] != nil %>
+                    <p class="card-text">First Meaningful Paint: <%= lighthouse_results['first-meaningful-paint']['displayValue'] %></p>
+                <% end %>
+                <% if lighthouse_results['first-cpu-idle'] != nil %>
+                    <p class="card-text">First CPU Idle: <%= lighthouse_results['first-cpu-idle']['displayValue'] %></p>
+                <% end %>
+                <% if lighthouse_results['estimated-input-latency'] != nil %>
+                    <p class="card-text">Estimated Input Latency: <%= lighthouse_results['estimated-input-latency']['displayValue'] %></p>
+                <% end %>
+                <br/>
+                Raw json result:    
                 <%= @speed_insights_response %>
+
             </div>
         </div>
     <% else %>
