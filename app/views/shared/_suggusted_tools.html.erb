@@ -35,6 +35,17 @@
                 </div>
             </div>
         <% end %>
+         <% if current_page != "speed_insights" %>
+            <div class="col-sm-4">
+                <div class="card mb-3 border-0 lift lift-lg shadow-light-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Speed Insights</h5>
+                    <p class="card-text">Inspect a website's keywords and SEO tactics. Useful for finding a way to outrank competitors.</p>
+                    <%= link_to "Try", tools_speed_insights_path, class:"btn btn-primary stretched-link" %>
+                </div>
+                </div>
+            </div>
+        <% end %>
     </div>
 
     

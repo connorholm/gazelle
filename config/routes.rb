@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'tools/tagging'
   get 'tools/keywords'
   get 'tools/page_inspect'
+  get 'tools/speed_insights'
   get 'tools/index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',

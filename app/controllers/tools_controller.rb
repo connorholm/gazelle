@@ -29,6 +29,13 @@ class ToolsController < ApplicationController
     end
   end
 
+  def speed_insights
+    if !(params[:url] == nil or params[:url] == "")
+      @speed_insights_response = speed_insights_request(params[:url])
+      @speed_insights_search = params[:url]
+    end
+  end
+
   def assign_search()
     @search_keywords = true
   end
@@ -108,5 +115,23 @@ class ToolsController < ApplicationController
     json = JSON.parse(response.body)
     puts json
     json
+  end
+
+  def speed_insights_request(q)
+    key = ENV["PAGE_SPEED_API_KEY"]
+    
+    api_url = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+    
+    query_parameters = {
+      'url' => q,
+      'key' => key
+    }
+    response = HTTParty.get(
+        api_url, 
+        :query => query_parameters,        
+    )
+    json = JSON.parse(response.body)
+    puts json
+    return json
   end
 end

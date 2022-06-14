@@ -1,0 +1,107 @@
+<%= stylesheet_link_tag "tools_page.css" %>
+<%= stylesheet_link_tag "searchbox.css" %>
+<%= stylesheet_link_tag "tools_background" %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <div class="text-bg-secondary">
+        <div class="py-6 row justify-content-center search-box-image">
+            <div class="col-12 col-md-10 col-lg-8">
+                <h2 class="display-4">Speed Insights</h2>
+                <p class="">Inspect a website's keywords and SEO tactics. Useful for finding a way to outrank competitors.</p>
+                <%= form_for(tools_speed_insights_path, method: "get", class:"card card-sm") do |f| %>
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <div class="col">
+                            <%= text_field_tag(:url, "", class:"form-control form-control-lg form-control-borderless", placeholder:"Enter Website URL (https://example.com)")  %>                            
+                        </div>
+                        <div class="col-auto">
+                            <%= f.button "Search", :name => nil, class: "btn btn-lg btn-primary" do %>
+                                <span class="show-when-enabled">Search</span>
+                                <span class="show-when-disabled"><i class='fa fa-spinner fa-spin'></i>  Loading</span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<div class="blue-gradient-bg pt-4">
+<% if @speed_insights_response != nil %>
+<div class="container">
+    <% if @speed_insights_response['error'] == nil %>
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="display-5">Search: </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><%= link_to @speed_insights_search, @speed_insights_search, :target => "_blank" %></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="display-5">Info</h3>
+            </div>
+            <div class="card-body">
+                <%= @speed_insights_response %>
+            </div>
+        </div>
+    <% else %>
+        <div class="mb-0 pb-4">
+            <h1> An Error Ocurred</h1>
+            <%= @speed_insights_response['error']['message'] %>
+            <br/>
+            <%= @speed_insights_response['error']['errors'].first['message'] %>
+        </div>
+    <% end %>
+</div>
+<% end %>
+<% if @speed_insights_response != nil %>
+    </div>
+    <div class="spacer" style="background-image: url(<%= asset_path 'svg/white-wave.svg' %>)"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Speed Insights</h1>
+                <p class="text-muted">
+                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                </p>
+            </div>
+            <div class="col-6 col-md-4">
+                <%= image_tag "page_inspect.png", class:"mx-auto d-block mt-5 mb-4", alt:"keyword graphic image" %>
+            </div>
+        </div>
+    </div>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "speed_insights"} %>
+<% else %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h1 class="display-4 mt-3">Using Speed Insights</h1>
+                <p class="text-muted">
+                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                </p>
+                <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                </p>
+                <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
+                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                </p>
+            </div>
+            <div class="col-6 col-md-4">
+                <%= image_tag "page_inspect.png", class:"mx-auto d-block mt-5 mb-4", alt:"keyword graphic image" %>
+            </div>
+        </div>
+    </div>
+    <%= render partial: '/shared/suggusted_tools', locals: {current_page: "speed_insights"} %>
+    </div>
+<% end %>
+</div>
+</div>
+</div>
