@@ -4,3 +4,6 @@ import "controllers"
 
 import 'custom/home_page'
 import '@fortawesome/fontawesome-free'
+
+import "chartkick"
+import "Chart.bundle"
