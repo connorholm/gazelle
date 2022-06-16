@@ -32,7 +32,7 @@
     <% if @speed_insights_response['error'] == nil %>
         <div class="card mb-4">
             <div class="card-header">
-                <h3 class="display-5">Search: </h3>
+                <h3 class="display-4">Search </h3>
             </div>
             <div class="card-body">
                 <p class="card-text"><%= link_to @speed_insights_search, @speed_insights_search, :target => "_blank" %></p>
@@ -40,71 +40,376 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <h3 class="display-5">Info</h3>
+                <h3 class="display-4">Results</h3>
             </div>
             <div class="card-body">
-                <h3>Chrome User Experience Report Results</h3>
-                <p class="card-text">First Contentful Paint: <%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
-                <p class="card-text">First Input Delay: <%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
-                <br/>
-                <h3>LightHouse Results</h3>
-                <% lighthouse_results = @speed_insights_response['lighthouseResult']['audits'] %>
-                <% if lighthouse_results['first-contentful-paint'] != nil %>
-                    <p class="card-text">First Contentful Paint: <%= lighthouse_results['first-contentful-paint']['displayValue'] %></p>
-                <% end %>
-                <% if lighthouse_results['interactive'] != nil %>
-                    <p class="card-text">Speed Index: <%= lighthouse_results['interactive']['displayValue'] %></p>
-                <% end %>
-                <% if lighthouse_results['interactive'] != nil%>
-                    <p class="card-text">Time To Interactive: <%= lighthouse_results['interactive']['displayValue'] %></p>
-                <% end %>
-                <% if lighthouse_results['first-meaningful-paint'] != nil %>
-                    <p class="card-text">First Meaningful Paint: <%= lighthouse_results['first-meaningful-paint']['displayValue'] %></p>
-                <% end %>
-                <% if lighthouse_results['first-cpu-idle'] != nil %>
-                    <p class="card-text">First CPU Idle: <%= lighthouse_results['first-cpu-idle']['displayValue'] %></p>
-                <% end %>
-                <% if lighthouse_results['estimated-input-latency'] != nil %>
-                    <p class="card-text">Estimated Input Latency: <%= lighthouse_results['estimated-input-latency']['displayValue'] %></p>
-                <% end %>
-                <br/>
-
-                <% largest_contentful_paint = @speed_insights_response["loadingExperience"]['metrics']["LARGEST_CONTENTFUL_PAINT_MS"]["distributions"] %>
-                <%= largest_contentful_paint.first %>
-                <%= largest_contentful_paint.second %>
-                <%= largest_contentful_paint.third %>
-                <% if @speed_insights_response["loadingExperience"]["metrics"]["LARGEST_CONTENTFUL_PAINT_MS"] != nil %>
-                    <div class="card text-center" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Largest Contentful Paint</h5>
-                            <% largest_contentful_paint_percentile = @speed_insights_response["loadingExperience"]['metrics']["LARGEST_CONTENTFUL_PAINT_MS"]["percentile"] %>
-                            <% if largest_contentful_paint_percentile < 1000 %>
-                                <% if largest_contentful_paint_percentile <= largest_contentful_paint.first["max"]%>
-                                    <p class="card-text" style="color: #0cce6a;"><%= largest_contentful_paint_percentile %> ms</p>
-                                <% elsif largest_contentful_paint_percentile <= largest_contentful_paint.second["max"] %>
-                                    <p class="card-text" style="color: #ffa400;"><%= largest_contentful_paint_percentile %> ms</p>
-                                <% else %>
-                                    <p class="card-text" style="color: #ff4e43;"><%= largest_contentful_paint_percentile %> ms</p>
-                                <% end %>
-                            <% else %>
-                                <% if largest_contentful_paint_percentile <= largest_contentful_paint.first["max"]%>
-                                    <p class="card-text" style="color: #0cce6a;"><%= largest_contentful_paint_percentile / 1000.0 %> s</p>
-                                <% elsif largest_contentful_paint_percentile <= largest_contentful_paint.second["max"] %>
-                                    <p class="card-text" style="color: #ffa400;"><%= largest_contentful_paint_percentile / 1000.0 %> s</p>
-                                <% else %>
-                                    <p class="card-text" style="color: #ff4e43;"><%= largest_contentful_paint_percentile / 1000.0%> s</p>
-                                <% end %>
+                <section>
+                    <h3 class="display-5">Web Vitals Assessment</h3>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["LARGEST_CONTENTFUL_PAINT_MS"] != nil %>
+                                <% largest_contentful_paint = @speed_insights_response["loadingExperience"]['metrics']["LARGEST_CONTENTFUL_PAINT_MS"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Largest Contentful Paint (LCP)</h5>
+                                        <% largest_contentful_paint_percentile = @speed_insights_response["loadingExperience"]['metrics']["LARGEST_CONTENTFUL_PAINT_MS"]["percentile"] %>
+                                        <% if largest_contentful_paint_percentile < 1000 %>
+                                            <% if largest_contentful_paint_percentile <= largest_contentful_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= largest_contentful_paint_percentile %> ms</p>
+                                            <% elsif largest_contentful_paint_percentile <= largest_contentful_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= largest_contentful_paint_percentile %> ms</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= largest_contentful_paint_percentile %> ms</p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if largest_contentful_paint_percentile <= largest_contentful_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= largest_contentful_paint_percentile / 1000.0 %> s</p>
+                                            <% elsif largest_contentful_paint_percentile <= largest_contentful_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= largest_contentful_paint_percentile / 1000.0 %> s</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= largest_contentful_paint_percentile / 1000.0%> s</p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", largest_contentful_paint.first["proportion"].round(4)], ["Needs Improvement", largest_contentful_paint.second["proportion"].round(4)], ["Poor", largest_contentful_paint.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/lcp/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
                             <% end %>
-                            <h6 class="card-text"></h6>
-                            <%= pie_chart [["Good", largest_contentful_paint.first["proportion"].round(4)], ["Needs Improvement", largest_contentful_paint.second["proportion"].round(4)], ["Poor", largest_contentful_paint.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
-                            <a href="https://web.dev/lcp/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                        </div>
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["FIRST_INPUT_DELAY_MS"] != nil %>
+                                <% first_input_delay = @speed_insights_response["loadingExperience"]['metrics']["FIRST_INPUT_DELAY_MS"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Input Delay (FID)</h5>
+                                        <% first_input_delay_ms_percentile = @speed_insights_response["loadingExperience"]['metrics']["FIRST_INPUT_DELAY_MS"]["percentile"] %>
+                                        <% if first_input_delay_ms_percentile < 1000 %>
+                                            <% if first_input_delay_ms_percentile <= first_input_delay.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= first_input_delay_ms_percentile %> ms</p>
+                                            <% elsif first_input_delay_ms_percentile <= first_input_delay.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= first_input_delay_ms_percentile %> ms</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= first_input_delay_ms_percentile %> ms</p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if first_input_delay_ms_percentile <= first_input_delay.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= first_input_delay_ms_percentile / 1000.0 %> s</p>
+                                            <% elsif first_input_delay_ms_percentile <= first_input_delay.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= first_input_delay_ms_percentile / 1000.0 %> s</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= first_input_delay_ms_percentile / 1000.0%> s</p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", first_input_delay.first["proportion"].round(4)], ["Needs Improvement", first_input_delay.second["proportion"].round(4)], ["Poor", first_input_delay.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/fid/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["CUMULATIVE_LAYOUT_SHIFT_SCORE"] != nil %>
+                                <% cumulative_layout_shift = @speed_insights_response["loadingExperience"]['metrics']["CUMULATIVE_LAYOUT_SHIFT_SCORE"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cumulative Layout Shift (CLS)</h5>
+                                        <% cumulative_layout_shift_percentile = @speed_insights_response["loadingExperience"]['metrics']["CUMULATIVE_LAYOUT_SHIFT_SCORE"]["percentile"] %>
+                                        <% if cumulative_layout_shift_percentile < 1000 %>
+                                            <% if cumulative_layout_shift_percentile <= cumulative_layout_shift.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= cumulative_layout_shift_percentile %></p>
+                                            <% elsif cumulative_layout_shift_percentile <= cumulative_layout_shift.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= cumulative_layout_shift_percentile %></p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= cumulative_layout_shift_percentile %></p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if cumulative_layout_shift_percentile <= cumulative_layout_shift.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= cumulative_layout_shift_percentile / 1000.0 %></p>
+                                            <% elsif cumulative_layout_shift_percentile <= cumulative_layout_shift.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= cumulative_layout_shift_percentile / 1000.0 %></p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= cumulative_layout_shift_percentile / 1000.0%></p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", cumulative_layout_shift.first["proportion"].round(4)], ["Needs Improvement", cumulative_layout_shift.second["proportion"].round(4)], ["Poor", cumulative_layout_shift.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/cls/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["FIRST_CONTENTFUL_PAINT_MS"] != nil %>
+                                <% first_contentful_paint = @speed_insights_response["loadingExperience"]['metrics']["FIRST_CONTENTFUL_PAINT_MS"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Contentful Paint (FCP)</h5>
+                                        <% first_contentful_paint_percentile = @speed_insights_response["loadingExperience"]['metrics']["FIRST_CONTENTFUL_PAINT_MS"]["percentile"] %>
+                                        <% if first_contentful_paint_percentile < 1000 %>
+                                            <% if first_contentful_paint_percentile <= first_contentful_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= first_contentful_paint_percentile %> ms</p>
+                                            <% elsif first_contentful_paint_percentile <= first_contentful_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= first_contentful_paint_percentile %> ms</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= first_contentful_paint_percentile %> ms</p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if first_contentful_paint_percentile <= first_contentful_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= first_contentful_paint_percentile / 1000.0 %> s</p>
+                                            <% elsif first_contentful_paint_percentile <= first_contentful_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= first_contentful_paint_percentile / 1000.0 %> s</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= first_contentful_paint_percentile / 1000.0%> s</p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", first_contentful_paint.first["proportion"].round(4)], ["Needs Improvement", first_contentful_paint.second["proportion"].round(4)], ["Poor", first_contentful_paint.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/fcp/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT"] != nil %>
+                                <% interaction_to_next_paint = @speed_insights_response["loadingExperience"]['metrics']["EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Interaction to Next Paint (INP)</h5>
+                                        <% interaction_to_next_paint_percentile = @speed_insights_response["loadingExperience"]['metrics']["EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT"]["percentile"] %>
+                                        <% if interaction_to_next_paint_percentile < 1000 %>
+                                            <% if interaction_to_next_paint_percentile <= interaction_to_next_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= interaction_to_next_paint_percentile %> ms</p>
+                                            <% elsif interaction_to_next_paint_percentile <= interaction_to_next_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= interaction_to_next_paint_percentile %> ms</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= interaction_to_next_paint_percentile %> ms</p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if interaction_to_next_paint_percentile <= interaction_to_next_paint.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= interaction_to_next_paint_percentile / 1000.0 %> s</p>
+                                            <% elsif interaction_to_next_paint_percentile <= interaction_to_next_paint.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= interaction_to_next_paint_percentile / 1000.0 %> s</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= interaction_to_next_paint_percentile / 1000.0%> s</p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", interaction_to_next_paint.first["proportion"].round(4)], ["Needs Improvement", interaction_to_next_paint.second["proportion"].round(4)], ["Poor", interaction_to_next_paint.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/inp/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="col">
+                            <% if @speed_insights_response["loadingExperience"]["metrics"]["EXPERIMENTAL_TIME_TO_FIRST_BYTE"] != nil %>
+                                <% time_to_first_byte = @speed_insights_response["loadingExperience"]['metrics']["EXPERIMENTAL_TIME_TO_FIRST_BYTE"]["distributions"] %>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Time to First Byte (TTFB)</h5>
+                                        <% time_to_first_byte_percentile = @speed_insights_response["loadingExperience"]['metrics']["EXPERIMENTAL_TIME_TO_FIRST_BYTE"]["percentile"] %>
+                                        <% if time_to_first_byte_percentile < 1000 %>
+                                            <% if time_to_first_byte_percentile <= time_to_first_byte.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= time_to_first_byte_percentile %> ms</p>
+                                            <% elsif time_to_first_byte_percentile <= time_to_first_byte.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= time_to_first_byte_percentile %> ms</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= time_to_first_byte_percentile %> ms</p>
+                                            <% end %>
+                                        <% else %>
+                                            <% if time_to_first_byte_percentile <= time_to_first_byte.first["max"]%>
+                                                <p class="card-text" style="color: #0cce6a;"><%= time_to_first_byte_percentile / 1000.0 %> s</p>
+                                            <% elsif time_to_first_byte_percentile <= time_to_first_byte.second["max"] %>
+                                                <p class="card-text" style="color: #ffa400;"><%= time_to_first_byte_percentile / 1000.0 %> s</p>
+                                            <% else %>
+                                                <p class="card-text" style="color: #ff4e43;"><%= time_to_first_byte_percentile / 1000.0%> s</p>
+                                            <% end %>
+                                        <% end %>
+                                        <h6 class="card-text"></h6>
+                                        <%= pie_chart [["Good", time_to_first_byte.first["proportion"].round(4)], ["Needs Improvement", time_to_first_byte.second["proportion"].round(4)], ["Poor", time_to_first_byte.third["proportion"].round(4)]], colors: ["#0cce6a", "#ffa400", "#ff4e43"], donut: true %>
+                                        <a href="https://web.dev/ttfb/" class="btn btn-primary mt-3" target="_blank">Learn More</a>
+                                    </div>
+                                </div>
+                            <% end %>
                         </div>
                     </div>
-                <% end %>
+                </section>
                 <br/>
-                Raw json result:    
-                <%= @speed_insights_response %>
-
+                <section>
+                    <h3 class="display-5 mb-4">User Experience Report Results</h3>
+                    <% if @speed_insights_response['loadingExperience']['overall_category'] == "FAST" %>
+                        <h4 class="mx-3">Overall Loading Speed: <span style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['overall_category'] %></span></h6>
+                    <% elsif @speed_insights_response["loadingExperience"]['overall_category'] == "AVERAGE" %>
+                        <h4 class="mx-3" >Overall Loading Speed: <span style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['overall_category']  %></span></h6>
+                    <% else %>
+                        <h4 class="mx-3">Overall Loading Speed: <span style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['overall_category'] %></span></h6>
+                    <% end %>
+                    <div class="row row-cols-2 row-cols-lg-3 g-4">
+                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Contentful Paint</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cumulative Layout Shift</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Interaction to Next Paint</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Time to First Byte</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %> 
+                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Input Delay</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %> 
+                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Largest Contentful Paint</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %> 
+                    </div>
+                </section>
+                <br/>
+                <section>
+                    <h3 class="display-5">Metrics</h3>
+                    <% lighthouse_results = @speed_insights_response['lighthouseResult']['audits'] %>
+                    <div class="row row-cols-2 row-cols-lg-3 g-4">
+                        <% if lighthouse_results['first-contentful-paint'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['first-contentful-paint']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['first-contentful-paint']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if lighthouse_results['interactive'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['interactive']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['interactive']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if lighthouse_results['speed-index'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['speed-index']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['speed-index']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if lighthouse_results['total-blocking-time'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['total-blocking-time']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['total-blocking-time']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if lighthouse_results['largest-contentful-paint'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['largest-contentful-paint']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['largest-contentful-paint']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if lighthouse_results['cumulative-layout-shift'] != nil %>
+                            <div class="col"> 
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= lighthouse_results['cumulative-layout-shift']["title"] %></h5>
+                                        <p class="card-text display-6" style="color: #338ee4;"><%= lighthouse_results['cumulative-layout-shift']["displayValue"] %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </section>
             </div>
         </div>
     <% else %>
