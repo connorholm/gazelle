@@ -245,17 +245,33 @@
                         <h4 class="mx-3">Overall Loading Speed: <span style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['overall_category'] %></span></h6>
                     <% end %>
                     <div class="row row-cols-2 row-cols-lg-3 g-4">
-                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS'] != nil%>
+                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS'] != nil%>
                             <div class="col">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <h5 class="card-title">First Contentful Paint</h5>
-                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
-                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
-                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
-                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <h5 class="card-title">Largest Contentful Paint</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
                                         <% else %>
-                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Input Delay</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
                                         <% end %>
                                     </div>
                                 </div>
@@ -272,6 +288,22 @@
                                             <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] %></p>
                                         <% else %>
                                             <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['CUMULATIVE_LAYOUT_SHIFT_SCORE']['category'] %></p>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>  
+                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS'] != nil%>
+                            <div class="col">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">First Contentful Paint</h5>
+                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
+                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
+                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
+                                        <% else %>
+                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_CONTENTFUL_PAINT_MS']['category'] %></p>
                                         <% end %>
                                     </div>
                                 </div>
@@ -293,7 +325,7 @@
                                 </div>
                             </div>
                         <% end %>
-                    <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE'] != nil%>
+                        <% if @speed_insights_response['loadingExperience']['metrics']['EXPERIMENTAL_TIME_TO_FIRST_BYTE'] != nil%>
                             <div class="col">
                                 <div class="card border-0">
                                     <div class="card-body">
@@ -309,38 +341,8 @@
                                 </div>
                             </div>
                         <% end %> 
-                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS'] != nil%>
-                            <div class="col">
-                                <div class="card border-0">
-                                    <div class="card-body">
-                                        <h5 class="card-title">First Input Delay</h5>
-                                        <% if @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "FAST" %>
-                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
-                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] == "AVERAGE" %>
-                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
-                                        <% else %>
-                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['FIRST_INPUT_DELAY_MS']['category'] %></p>
-                                        <% end %>
-                                    </div>
-                                </div>
-                            </div>
-                        <% end %> 
-                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS'] != nil%>
-                            <div class="col">
-                                <div class="card border-0">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Largest Contentful Paint</h5>
-                                        <% if @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "FAST" %>
-                                            <p class="card-text" style="color: #0cce6a;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
-                                        <% elsif @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] == "AVERAGE" %>
-                                            <p class="card-text" style="color: #ffa400;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
-                                        <% else %>
-                                            <p class="card-text" style="color: #ff4e43;"><%= @speed_insights_response['loadingExperience']['metrics']['LARGEST_CONTENTFUL_PAINT_MS']['category'] %></p>
-                                        <% end %>
-                                    </div>
-                                </div>
-                            </div>
-                        <% end %> 
+                        
+                        
                     </div>
                 </section>
                 <br/>
@@ -430,17 +432,17 @@
             <div class="col-12 col-md-8">
                 <h1 class="display-4 mt-3">Using Speed Insights</h1>
                 <p class="text-muted">
-                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                Speed Insights will let run various speed test on a website to test for its overall performance. It will grade the page on various different aspects of performance and will provide results for each sub-category.
                 </p>
                 <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
-                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The process can take up to a minute as it needs to run multiple tests on the websites page, some of which can be time intensive.
                 </p>
                 <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
-                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                The results will gage how well the inputed websites preforms. If there is a category that you would like to improve, clicking the learn more button on the graph will help explain what the test is and how to improve it. Overall, this tools is a helpful way to track the usability that a user would have on a certain website.
                 </p>
             </div>
             <div class="col-6 col-md-4">
-                <%= image_tag "page_inspect.png", class:"mx-auto d-block mt-5 mb-4", alt:"keyword graphic image" %>
+                <%= image_tag "speed_insighs_graph.png", class:"mx-auto d-block mt-5 mb-4", alt:"speed insights graphic image" %>
             </div>
         </div>
     </div>
@@ -451,17 +453,17 @@
             <div class="col-12 col-md-8">
                 <h1 class="display-4 mt-3">Using Speed Insights</h1>
                 <p class="text-muted">
-                Page inspect will let you analyze your competitors websites to see the different keywords that they are using. This will help you to determine if you are using the right keywords to get the most traffic and also out-rank your competitors websites.
+                Speed Insights will let run various speed test on a website to test for its overall performance. It will grade the page on various different aspects of performance and will provide results for each sub-category.
                 </p>
                 <p class="mt-4 text-muted"><strong>How to Use the Tool.</strong>
-                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The result will provide a large amout of information regarding the website.
+                To analyze a website, add the URL to the search box. Follow the format https://your_competitors_website.com (Example: https://finance.yahoo.com/). The process can take up to a minute as it needs to run multiple tests on the websites page, some of which can be time intensive.
                 </p>
                 <p class="mt-4 text-muted"><strong>Properly using the results.</strong>
-                Once you have the keywords generated from the url, start to analyze them and decide if you need to add them to your website. Starting to implement you competitors keywords your website content will rank similarly to your competitors. If you make the content more original and longer then you can out-rank them too.
+                The results will gage how well the inputed websites preforms. If there is a category that you would like to improve, clicking the learn more button on the graph will help explain what the test is and how to improve it. Overall, this tools is a helpful way to track the usability that a user would have on a certain website.
                 </p>
             </div>
             <div class="col-6 col-md-4">
-                <%= image_tag "page_inspect.png", class:"mx-auto d-block mt-5 mb-4", alt:"keyword graphic image" %>
+                <%= image_tag "speed_insighs_graph.png", class:"mx-auto d-block mt-5 mb-4", alt:"speed insights graphic image" %>
             </div>
         </div>
     </div>
